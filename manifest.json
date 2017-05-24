@@ -11,8 +11,7 @@
   },
   "browser_action":{
     "default_icon":"icon.png",
-    "default_title":"notes",
-    "default_popup":"popup.html"
+    "default_title":"notes"
 
   },
   "background":{
