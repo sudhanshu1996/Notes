@@ -6,6 +6,11 @@ var menuItem = {
 
 chrome.contextMenus.create(menuItem);
 
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+    chrome.tabs.create({url: chrome.extension.getURL('popup.html')});
+});
+
 chrome.contextMenus.onClicked.addListener(function(clickData){
   if(clickData.menuItemId == "addtonotes" && clickData.selectionText){
      chrome.storage.sync.get('notes',function(mynotes){
