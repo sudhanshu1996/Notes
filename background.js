@@ -11,7 +11,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData){
      chrome.storage.sync.get('notes',function(mynotes){
        var newnotes = "";
        if(mynotes.notes){
-         alert(mynotes.notes);
+        // alert(mynotes.notes);
          newnotes = mynotes.notes+"\n"+ clickData.selectionText;
 
        }else{
