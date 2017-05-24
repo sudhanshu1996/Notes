@@ -12,7 +12,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData){
        var newnotes = "";
        if(mynotes.notes){
         // alert(mynotes.notes);
-         newnotes = mynotes.notes+"\n"+ clickData.selectionText;
+         newnotes = mynotes.notes+"`"+ clickData.selectionText;
 
        }else{
          newnotes += clickData.selectionText;
