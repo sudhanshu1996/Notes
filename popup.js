@@ -22,7 +22,7 @@ $(function(){
       x.appendChild(t);
       document.getElementById("notes").appendChild(x);
       //  $('#notes').text(mynotes.notes);
-
+     
     });
 
   //  $('#notes').text(newnotes);

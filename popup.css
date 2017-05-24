@@ -2,3 +2,10 @@ body{
   min-width: 500px;
   min-height: 500px;
 }
+li{
+  margin: 10px 0 ;
+}
+ol {
+    background: #ff9999;
+    padding: 20px;
+}
