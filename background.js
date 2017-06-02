@@ -1,10 +1,62 @@
 var menuItem = {
   "id" : "addtonotes",
-  "title" : "Add to Notes",
-  "contexts" : ["selection"]
+  "title" : "Add to notes",
+  "contexts" : ["selection","link"]
 };
 
-chrome.contextMenus.create(menuItem);
+var menuItem2 = {
+  "id" : "linktonotes",
+  "title" : "Add link  to notes",
+  "contexts" : ["link"]
+};
+/*var contextsList = ["selection","link","image","page"];
+var context;
+for(i=0 ;i<contextsList.length;i++){
+ context = contextsList[i];
+var titleX = "Twitter Toolkit share this "+ context+" on your twitter profile";
+chrome.contextMenus.create({
+  title : titleX,
+  contexts:[context],
+  id:context,
+  //onclick:myfunction
+});
+}*/
+
+chrome.storage.sync.get(['alldetails'],function(mynotes){
+  if(!mynotes.alldetails)
+    chrome.storage.sync.set({'alldetails':"notes3`"},function(){  });
+
+});
+var hp=chrome.contextMenus.create(menuItem);
+var  ph=chrome.contextMenus.create(menuItem2);
+
+var text="";
+var arr=new Array(100);
+var brr=new Array(100);
+var crr=new Array(100);
+var count,p,x,y;
+count=0;
+//alert(contexts);
+
+  chrome.storage.sync.get(['alldetails'],function(mynotes){
+    for(i=0;i<mynotes.alldetails.length;i++){
+      if(mynotes.alldetails[i]!="`"){
+        text+=mynotes.alldetails[i];
+      }
+      else{
+        brr[count]=text;
+        p=text.slice(0,text.length-1);
+        arr[count]=p+"1";
+        crr[count]=p+"2";
+
+        chrome.contextMenus.create({"title":p,"contexts" : ["selection"], "id":arr[count], "parentId":hp});
+        chrome.contextMenus.create({"title":p,"contexts" : ["link"], "id":crr[count], "parentId":ph});
+        count=count+1;
+        text="";
+      }
+    }
+  });
+
 
 
 chrome.browserAction.onClicked.addListener(function(tab) {
@@ -12,21 +64,41 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 });
 
 chrome.contextMenus.onClicked.addListener(function(clickData){
-  if(clickData.menuItemId == "addtonotes" && clickData.selectionText){
-     chrome.storage.sync.get('notes',function(mynotes){
-       var newnotes = "";
-       if(mynotes.notes){
-        // alert(mynotes.notes);
-         newnotes = mynotes.notes+"`"+ clickData.selectionText;
 
+  for(i=0;i<count;i++){
+
+  if(clickData.menuItemId == arr[i] && clickData.selectionText){
+    x=p;
+    alert(arr[i]);
+     chrome.storage.sync.get(x,function(mynotes){
+       var newnotes = "";
+       alert(mynotes[x]);
+       if(mynotes[x]){
+         newnotes = mynotes[x]+ clickData.selectionText + "`";
+         alert("hii");
        }else{
          newnotes += clickData.selectionText;
-         alert('hello gals');
+         newnotes += "`";
+         alert(newnotes);
        }
-       chrome.storage.sync.set({'notes':newnotes},function(){
-
-        $('#notes').text(mynotes.notes);
-       });
+       alert(newnotes);
+       chrome.storage.sync.set({[x]:newnotes},function(){  });
+       alert(mynotes[x]);
      });
   }
+  else if(1){
+   y=p;
+    chrome.storage.sync.get(y,function(mynotes){
+      var newnotes = "";
+      if(mynotes[y]){
+        newnotes = mynotes[y]+ clickData.linkUrl+"``";
+      }else{
+        newnotes += clickData.linkUrl;
+        newnotes += "``";
+      }
+      chrome.storage.sync.set({[y]:newnotes},function(){  });
+    });
+  }
+
+ }
 });
