@@ -1,11 +1,32 @@
 body{
   min-width: 500px;
   min-height: 500px;
+  font-size: 15px;
+  background-image: url("background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  word-wrap: break-word;
+}
+summary{
+  text-align: center;
+  font-style: italic;
+}
+#deleteAll{
+  position: absolute;
+  left: 1200px;
+  top: 70px;
+
 }
 li{
   margin: 10px 0 ;
 }
 ol {
-    background: #ff9999;
     padding: 20px;
+}
+ol li {
+    padding: 5px;
+    margin-left: 35px;
+}
+button{
+  float:right;
 }
