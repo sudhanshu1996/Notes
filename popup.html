@@ -2,15 +2,27 @@
 <html>
 <head>
 <link rel="stylesheet" href="popup.css" type="text/css">
-<title>Notes </title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 <script src="jquery-3.2.1.min.js"></script>
 <script src="popup.js"></script>
+<script src="delete.js"></script>
+
 </head>
-  <body>
-   <h2>Notes</h2>
-   <ol id = "notes">
-    <li>start</li>
-   </ol>
-    <h2>hell</h2><span id="bc"></span>
+  <body id="body">
+    <span id="alldetails"></span>
+    <input type="text" id="new" />
+    <span id="submit"><button >Submit</button></span>
+  <details id="notes3" open>
+    <summary>Notes</summary>
+    <span id="deleteAll" ><a href="chrome-extension://ojffefdplfkjgcfilifkomfifmdbceme/popup.html"><button type="button" class="btn btn-danger">delete All</button></a></span>
+    </br></br>
+    <ol id = "notes">
+    </ol>
+  </details>
+
   </body>
 </html>
