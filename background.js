@@ -68,28 +68,34 @@ chrome.contextMenus.onClicked.addListener(function(clickData){
   for(i=0;i<count;i++){
 
   if(clickData.menuItemId == arr[i] && clickData.selectionText){
-    x=p;
+    x=arr[i];
+    x=x.slice(0,x.length-1);
     alert(arr[i]);
      chrome.storage.sync.get(x,function(mynotes){
        var newnotes = "";
        alert(mynotes[x]);
        if(mynotes[x]){
          newnotes = mynotes[x]+ clickData.selectionText + "`";
-         alert("hii");
+         alert("hey");
        }else{
          newnotes += clickData.selectionText;
          newnotes += "`";
-         alert(newnotes);
+         //alert(newnotes);
        }
        alert(newnotes);
        chrome.storage.sync.set({[x]:newnotes},function(){  });
-       alert(mynotes[x]);
+       //alert(mynotes[x]);
      });
   }
-  else if(1){
-   y=p;
+  else if(clickData.menuItemId == crr[i] && clickData.linkUrl){
+
+   alert("hii");
+   y=crr[i];
+   y=y.slice(0,y.length-1);
+   alert(y);
     chrome.storage.sync.get(y,function(mynotes){
       var newnotes = "";
+      alert(mynotes[x]);
       if(mynotes[y]){
         newnotes = mynotes[y]+ clickData.linkUrl+"``";
       }else{
