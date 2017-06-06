@@ -23,6 +23,7 @@ $(document).ready(function(){
 
 
     });
+   }
     $('#deleteAll').on('click', 'button', function() {
        chrome.storage.sync.get(['notes'],function(mynotes){
          chrome.storage.sync.set({'notes':""},function(){  });
