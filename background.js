@@ -92,7 +92,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData){
    alert("hii");
    y=crr[i];
    y=y.slice(0,y.length-1);
-   alert(y);
+   //alert(y);
     chrome.storage.sync.get(y,function(mynotes){
       var newnotes = "";
       alert(mynotes[x]);
