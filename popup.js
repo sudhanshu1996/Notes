@@ -13,19 +13,37 @@ $(function(){
         else{
           b=textd;
           p=textd.slice(0,textd.length-1);
+          var node="",aid="";
+          var an,bt,bttext,linebreak;
+
           if(p!="notes"){
 
+          aid=p+"4";
+          node="delete "+p;
           details=document.createElement("details");
+          an=document.createElement("a");
+          linebreak=document.createElement("br");
+          bt=document.createElement("button");
+          bt.setAttribute("type","button");
+          bt.setAttribute("class","btn btn-danger");
+          bt.setAttribute("id",aid);
+          an.setAttribute("href","chrome-extension://ojffefdplfkjgcfilifkomfifmdbceme/popup.html");
+          bttext=document.createTextNode(node);
+          bt.appendChild(bttext);
+          an.appendChild(bt);
+
           olk=document.createElement("ol");
           olk.setAttribute("id",p);
-
           details.setAttribute("id",b);
           summary=document.createElement("summary");
           tab=document.createTextNode(p);
           summary.appendChild(tab);
           details.appendChild(summary);
+          details.appendChild(an);
+          details.appendChild(linebreak);
           details.appendChild(olk);
           document.getElementById("body").appendChild(details);
+
         }
 
           textd="";
@@ -122,16 +140,11 @@ $(function(){
                 newnotes = "";
                 //alert(b);
                 }
-                //alert(text);
-                //alert(i);
               }
 
             }
           });
         }
-
-
-
 
 });
 });
