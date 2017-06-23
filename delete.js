@@ -1,12 +1,26 @@
 $(document).ready(function(){
   var alldetails="";
-  var ol,olid;
+  var ol,olid,res="",ans="";
     $('#body').on('click', 'button', function() {
       //alert("sss");
-        var btn_id = $(this).attr('id')
+        var btn_id = $(this).attr('id');
+        var k=btn_id.slice(0,btn_id.length);
+        var req=k.slice(0,k.length-1);
+          chrome.storage.sync.get(['alldetails'],function(mynotes){
+            ans=mynotes.alldetails;
+            //alert(ans.indexOf(req));
+            if(req.length!=0 && ans.indexOf(req)!==-1)
+            { req=req+"3"+"`";
+              res=mynotes.alldetails.replace(req,"");
+              //alert("hi");
+              //alert(res);
+              chrome.storage.sync.set({'alldetails':res},function(){  });
+            }
+
+          });
         var id = $(this).closest('li').attr('id');
         var did= $(this).closest('details').attr('id');
-        var name=did.slice(0,did.length-1)
+        var name=did.slice(0,did.length-1);
         var store,summary,details;
         var ac = document.getElementById(id).innerHTML;
       var element= document.getElementById(id);
@@ -19,9 +33,9 @@ $(document).ready(function(){
       }
       else final+="``";
       chrome.storage.sync.get(name,function(mynotes){
-        alert(final);
+        //alert(final);
        store=mynotes[name].replace(final,"");
-       alert(store);
+       //alert(store);
        chrome.storage.sync.set({[name]:store},function(){  });
       });
 
