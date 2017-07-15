@@ -31,13 +31,15 @@ $(function(){
           bttext=document.createTextNode(node);
           bt.appendChild(bttext);
           an.appendChild(bt);
-
           olk=document.createElement("ol");
           olk.setAttribute("id",p);
           details.setAttribute("id",b);
+          strong=document.createElement("strong");
           summary=document.createElement("summary");
           tab=document.createTextNode(p);
-          summary.appendChild(tab);
+          strong.appendChild(tab);
+          summary.appendChild(strong);
+
           details.appendChild(summary);
           details.appendChild(an);
           details.appendChild(linebreak);
