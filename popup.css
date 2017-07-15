@@ -8,7 +8,7 @@ body{
   word-wrap: break-word;
 }
 summary{
-  text-align: center;
+  padding-left:50%;
   font-style: italic;
 }
 #deleteAll{
@@ -29,4 +29,10 @@ ol li {
 }
 button{
   float:right;
+}
+
+#new{
+  position:absolute;
+  top:15px;
+  margin-left: 720px;
 }
