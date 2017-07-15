@@ -71,7 +71,7 @@ $(function(){
             var color =["list-group-item list-group-item-success","list-group-item list-group-item-info",
                         "list-group-item list-group-item-danger","list-group-item list-group-item-warning"];
             p=ar[j-cc];cc=cc-1;
-          //  alert(p);
+            //alert(p);
             var text = mynotes[p];
             //alert(text);
 
