@@ -21,7 +21,7 @@ chrome.contextMenus.create({
   //onclick:myfunction
 });
 }*/
-
+ var f=0;
 chrome.storage.sync.get(['alldetails'],function(mynotes){
   if(!mynotes.alldetails)
     chrome.storage.sync.set({'alldetails':"notes3`"},function(){  });
@@ -37,7 +37,12 @@ var crr=new Array(100);
 var count,p,x,y;
 count=0;
 //alert(contexts);
-
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  for( i=0;i<2;i++){
+    //alert("hi");
+    chrome.contextMenus.remove(arr[i]);
+  }
+  count=0;
   chrome.storage.sync.get(['alldetails'],function(mynotes){
     for(i=0;i<mynotes.alldetails.length;i++){
       if(mynotes.alldetails[i]!="`"){
@@ -48,14 +53,39 @@ count=0;
         p=text.slice(0,text.length-1);
         arr[count]=p+"1";
         crr[count]=p+"2";
-
         chrome.contextMenus.create({"title":p,"contexts" : ["selection"], "id":arr[count], "parentId":hp});
         chrome.contextMenus.create({"title":p,"contexts" : ["link"], "id":crr[count], "parentId":ph});
         count=count+1;
         text="";
       }
     }
+    f=1;
+    
+    });
   });
+      if(f==0){
+        chrome.storage.sync.get(['alldetails'],function(mynotes){
+          for(i=0;i<mynotes.alldetails.length;i++){
+            if(mynotes.alldetails[i]!="`"){
+              text+=mynotes.alldetails[i];
+            }
+            else{
+              brr[count]=text;
+              p=text.slice(0,text.length-1);
+              arr[count]=p+"1";
+              crr[count]=p+"2";
+
+              chrome.contextMenus.create({"title":p,"contexts" : ["selection"], "id":arr[count], "parentId":hp});
+              chrome.contextMenus.create({"title":p,"contexts" : ["link"], "id":crr[count], "parentId":ph});
+              count=count+1;
+              text="";
+            }
+          }
+          //alert(count);
+        });
+}
+
+
 
 
 
@@ -70,9 +100,10 @@ chrome.contextMenus.onClicked.addListener(function(clickData){
   if(clickData.menuItemId == arr[i] && clickData.selectionText){
     x=arr[i];
     x=x.slice(0,x.length-1);
-  //  alert(arr[i]);
+    //alert(x);
      chrome.storage.sync.get(x,function(mynotes){
-       var newnotes = "";
+        var newnotes = "";
+       //alert("hi");
        //alert(mynotes[x]);
        if(mynotes[x]){
          newnotes = mynotes[x]+ clickData.selectionText + "`";
@@ -86,6 +117,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData){
        chrome.storage.sync.set({[x]:newnotes},function(){  });
        //alert(mynotes[x]);
      });
+
   }
   else if(clickData.menuItemId == crr[i] && clickData.linkUrl){
 
