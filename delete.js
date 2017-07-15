@@ -10,12 +10,18 @@ $(document).ready(function(){
             ans=mynotes.alldetails;
             //alert(ans.indexOf(req));
             if(req.length!=0 && ans.indexOf(req)!==-1)
-            { req=req+"3"+"`";
+            {  //alert(req);
+              x=req;
+               chrome.storage.sync.get(x,function(mynotes){
+                 empt="";
+                 chrome.storage.sync.set({[x]:empt},function(){  });
+               });
+               req=req+"3"+"`";
+               //alert(req);
               res=mynotes.alldetails.replace(req,"");
-              //alert("hi");
-              //alert(res);
               chrome.storage.sync.set({'alldetails':res},function(){  });
-              chrome.runtime.reload();
+              //chrome.runtime.reload();
+              //chrome.extension.getBackgroundPage().updateSetting();
             }
 
           });
@@ -34,7 +40,7 @@ $(document).ready(function(){
       }
       else final+="``";
       chrome.storage.sync.get(name,function(mynotes){
-        alert(final);
+        //alert(final);
       //  alert("hi");
        store=mynotes[name].replace(final,"");
        //alert(store);
@@ -106,7 +112,7 @@ $(document).ready(function(){
         document.getElementById("body").appendChild(details);
         chrome.storage.sync.set({'alldetails':alldetails},function(){  });
         //alert(mynotes.alldetails);
-           chrome.runtime.reload();
+          // chrome.runtime.reload();
       }
     }
       });
