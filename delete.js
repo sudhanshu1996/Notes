@@ -15,6 +15,7 @@ $(document).ready(function(){
               //alert("hi");
               //alert(res);
               chrome.storage.sync.set({'alldetails':res},function(){  });
+              chrome.runtime.reload();
             }
 
           });
@@ -26,19 +27,22 @@ $(document).ready(function(){
       var element= document.getElementById(id);
       var text=  element.textContent;
       var final=text.slice(0,text.length);
-      alert(text);
+      //alert(text);
       var x = parseInt(id);
         if(x%2==0){
        final+="`";
       }
       else final+="``";
       chrome.storage.sync.get(name,function(mynotes){
-        //alert(final);
+        alert(final);
+      //  alert("hi");
        store=mynotes[name].replace(final,"");
        //alert(store);
-       chrome.storage.sync.set({[name]:store},function(){  });
-      });
 
+
+       chrome.storage.sync.set({[name]:store},function(){  });
+
+      });
 
     });
    //}
@@ -52,6 +56,11 @@ $(document).ready(function(){
       chrome.storage.sync.get(['alldetails'],function(mynotes){
         var k=0;
         var text=document.getElementById("new");
+      //alert(text.value.length);
+        if(text.value.length==0){
+          alert("This field cannot be empty");
+        }
+        else{
         var textd,p;
         //alert(text.value);
         for(i=0;i<mynotes.alldetails.length;i++){
@@ -71,7 +80,6 @@ $(document).ready(function(){
             }
         }
       }
-      //alert(k);
       if(k==1)
       {
         alert("Select some different name this name is already available");
@@ -88,17 +96,19 @@ $(document).ready(function(){
        //details.setAttribute(open);
          //alert(mynotes.alldetails);
         alldetails=mynotes.alldetails+olid+"`";
+        strong=document.createElement("strong");
         summary=document.createElement("summary");
         tab=document.createTextNode(text.value);
-        summary.appendChild(tab);
+        strong.appendChild(tab);
+        summary.appendChild(strong);
         details.appendChild(summary);
         details.appendChild(ol);
         document.getElementById("body").appendChild(details);
         chrome.storage.sync.set({'alldetails':alldetails},function(){  });
-        alert(mynotes.alldetails);
-
+        //alert(mynotes.alldetails);
+           chrome.runtime.reload();
       }
-
+    }
       });
     });
 });
