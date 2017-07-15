@@ -70,32 +70,32 @@ chrome.contextMenus.onClicked.addListener(function(clickData){
   if(clickData.menuItemId == arr[i] && clickData.selectionText){
     x=arr[i];
     x=x.slice(0,x.length-1);
-    alert(arr[i]);
+  //  alert(arr[i]);
      chrome.storage.sync.get(x,function(mynotes){
        var newnotes = "";
-       alert(mynotes[x]);
+       //alert(mynotes[x]);
        if(mynotes[x]){
          newnotes = mynotes[x]+ clickData.selectionText + "`";
-         alert("hey");
+         //alert("hey");
        }else{
          newnotes += clickData.selectionText;
          newnotes += "`";
          //alert(newnotes);
        }
-       alert(newnotes);
+       //alert(newnotes);
        chrome.storage.sync.set({[x]:newnotes},function(){  });
        //alert(mynotes[x]);
      });
   }
   else if(clickData.menuItemId == crr[i] && clickData.linkUrl){
 
-   alert("hii");
+   //alert("hii");
    y=crr[i];
    y=y.slice(0,y.length-1);
    //alert(y);
     chrome.storage.sync.get(y,function(mynotes){
       var newnotes = "";
-      alert(mynotes[x]);
+    //  alert(mynotes[x]);
       if(mynotes[y]){
         newnotes = mynotes[y]+ clickData.linkUrl+"``";
       }else{
