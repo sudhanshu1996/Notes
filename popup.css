@@ -2,21 +2,16 @@ body{
   min-width: 500px;
   min-height: 500px;
   font-size: 15px;
-  background-image: url("background.png");
+  background-image: url("23.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   word-wrap: break-word;
 }
 summary{
   padding-left:50%;
-  font-style: italic;
+  font-style: ialic;
 }
-#deleteAll{
-  position: absolute;
-  left: 1200px;
-  top: 70px;
 
-}
 li{
   margin: 10px 0 ;
 }
