@@ -20,6 +20,8 @@ $(function(){
 
           aid=p+"4";
           node="delete "+p;
+          division=document.createElement("div");
+          division.setAttribute("class","container");
           details=document.createElement("details");
           an=document.createElement("a");
           linebreak=document.createElement("br");
@@ -30,21 +32,30 @@ $(function(){
           an.setAttribute("href","chrome-extension://ojffefdplfkjgcfilifkomfifmdbceme/popup.html");
           bttext=document.createTextNode(node);
           bt.appendChild(bttext);
+
           an.appendChild(bt);
+          an.appendChild(document.createElement("br"));
           olk=document.createElement("ol");
           olk.setAttribute("id",p);
           details.setAttribute("id",b);
+          fon=document.createElement("font");
+          fon.setAttribute("color","black");
           strong=document.createElement("strong");
           summary=document.createElement("summary");
+          summary.setAttribute("class","btn btn-success btn-block");
           tab=document.createTextNode(p);
-          strong.appendChild(tab);
+          fon.appendChild(tab);
+          strong.appendChild(fon);
           summary.appendChild(strong);
 
           details.appendChild(summary);
           details.appendChild(an);
-          details.appendChild(linebreak);
+          //document.getElementById(aid).appendChild(linebreak);
+          //details.appendChild(linebreak);
           details.appendChild(olk);
-          document.getElementById("body").appendChild(details);
+          division.appendChild(details);
+          document.getElementById("body").appendChild(linebreak);
+          document.getElementById("body").appendChild(division);
 
         }
 
@@ -122,6 +133,8 @@ $(function(){
               //  alert(newnotes.length);
                 button = document.createElement("button");
                 abutton= document.createElement("a");
+                fon=document.createElement("font");
+                fon.setAttribute("color","black");
               //  button.innerHTML = "x";
                button.setAttribute("class","btn btn-danger btn-xs");
                //alert(countt);
@@ -129,7 +142,8 @@ $(function(){
                 button.appendChild(span);
                 abutton.appendChild(button);
                 abutton.setAttribute("href","chrome-extension://ojffefdplfkjgcfilifkomfifmdbceme/popup.html");
-                li.appendChild(t);
+                fon.appendChild(t);
+                li.appendChild(fon);
                 li.appendChild(abutton);
 
                 ol=document.getElementById(p);
