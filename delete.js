@@ -91,12 +91,24 @@ $(document).ready(function(){
         alert("Select some different name this name is already available");
       }
       else {
-
+        division=document.createElement("div");
+        division.setAttribute("class","container");
         details=document.createElement("details");
         ol=document.createElement("ol");
         olid=text.value+"3";
         //var k;
       //  alert(olid);
+      an=document.createElement("a");
+      linebreak=document.createElement("br");
+      bt=document.createElement("button");
+      bt.setAttribute("type","button");
+      bt.setAttribute("class","btn btn-danger");
+      bt.setAttribute("id",text.value+"4");
+      an.setAttribute("href","chrome-extension://ojffefdplfkjgcfilifkomfifmdbceme/popup.html");
+      bttext=document.createTextNode("delete "+text.value);
+      bt.appendChild(bttext);
+      an.appendChild(bt);
+      an.appendChild(document.createElement("br"));
         ol.setAttribute("id",text.value); //li.setAttribute("id",countl);
         details.setAttribute("id",olid);
        //details.setAttribute(open);
@@ -104,12 +116,17 @@ $(document).ready(function(){
         alldetails=mynotes.alldetails+olid+"`";
         strong=document.createElement("strong");
         summary=document.createElement("summary");
+        summary.setAttribute("class","btn btn-success btn-block");
         tab=document.createTextNode(text.value);
         strong.appendChild(tab);
         summary.appendChild(strong);
         details.appendChild(summary);
         details.appendChild(ol);
-        document.getElementById("body").appendChild(details);
+        division.appendChild(details);
+
+        document.getElementById("body").appendChild(linebreak);
+        document.getElementById("body").appendChild(division);
+
         chrome.storage.sync.set({'alldetails':alldetails},function(){  });
         //alert(mynotes.alldetails);
           // chrome.runtime.reload();
