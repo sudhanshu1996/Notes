@@ -38,12 +38,14 @@ var count,p,x,y;
 count=0;
 //alert(contexts);
 chrome.storage.onChanged.addListener(function(changes, namespace) {
-  for( i=0;i<2;i++){
-    //alert("hi");
+
+  for( i=0;i<count;i++){
+    //alert(arr[i]);
     chrome.contextMenus.remove(arr[i]);
   }
   count=0;
   chrome.storage.sync.get(['alldetails'],function(mynotes){
+    //alert(mynotes.alldetails);
     for(i=0;i<mynotes.alldetails.length;i++){
       if(mynotes.alldetails[i]!="`"){
         text+=mynotes.alldetails[i];
@@ -60,10 +62,10 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
       }
     }
     f=1;
-    
+    //alert(count);
     });
   });
-      if(f==0){
+      if(f==0){count=0;
         chrome.storage.sync.get(['alldetails'],function(mynotes){
           for(i=0;i<mynotes.alldetails.length;i++){
             if(mynotes.alldetails[i]!="`"){
@@ -116,6 +118,18 @@ chrome.contextMenus.onClicked.addListener(function(clickData){
        //alert(newnotes);
        chrome.storage.sync.set({[x]:newnotes},function(){  });
        //alert(mynotes[x]);
+
+       chrome.tabs.getAllInWindow(null, function(tabs)
+       {
+        for(var i = 0; i < tabs.length; i++)
+        {
+           if(tabs[i].title.indexOf("Notes") != -1)
+           {
+             chrome.tabs.update(tabs[i].id, {url: tabs[i].url});
+             break;
+           }
+        }
+      });
      });
 
   }
@@ -135,6 +149,17 @@ chrome.contextMenus.onClicked.addListener(function(clickData){
         newnotes += "``";
       }
       chrome.storage.sync.set({[y]:newnotes},function(){  });
+      chrome.tabs.getAllInWindow(null, function(tabs)
+      {
+       for(var i = 0; i < tabs.length; i++)
+       {
+          if(tabs[i].title.indexOf("Notes") != -1)
+          {
+            chrome.tabs.update(tabs[i].id, {url: tabs[i].url});
+            break;
+          }
+       }
+     });
     });
   }
 
