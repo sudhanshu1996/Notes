@@ -1,7 +1,7 @@
 {
   "manifest_version":2,
   "name":"notes",
-  "version":"1.0",
+  "version":"0.0.1",
   "description":"an extension",
   "icons":{
     "64":"icon.png",
@@ -12,7 +12,6 @@
   "browser_action":{
     "default_icon":"icon.png",
     "default_title":"notes"
-
   },
   "background":{
     "scripts":["jquery-3.2.1.min.js","background.js"],
@@ -20,7 +19,8 @@
   },
   "permissions":[
     "contextMenus",
-    "storage"
+    "storage",
+    "tabs"
   ]
 
 }
